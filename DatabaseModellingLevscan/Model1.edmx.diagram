@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d859451c277843c1865b5dc989bc78a4" Name="Diagram1" ZoomLevel="86" >
+        <EntityTypeShape EntityType="Model1.Setting" Width="1.5" PointX="10.25" PointY="0.5" />
+        <EntityTypeShape EntityType="Model1.Inbox" Width="1.5" PointX="14.875" PointY="0.5" />
+        <EntityTypeShape EntityType="Model1.Invoice" Width="1.5" PointX="3.875" PointY="3" />
+        <EntityTypeShape EntityType="Model1.InvoiceRow" Width="1.5" PointX="3.5" PointY="6.5" />
+        <EntityTypeShape EntityType="Model1.AspNetRoles" Width="1.5" PointX="14.625" PointY="2.75" />
+        <EntityTypeShape EntityType="Model1.AspNetUserClaims" Width="1.5" PointX="16.875" PointY="9" />
+        <EntityTypeShape EntityType="Model1.AspNetUserLogins" Width="1.5" PointX="16.625" PointY="5.875" />
+        <EntityTypeShape EntityType="Model1.AspNetUsers" Width="1.5" PointX="13.5" PointY="5.25" />
+        <AssociationConnector Association="Model1.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="Model1.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="Model1.AspNetUserRoles" />
+        <EntityTypeShape EntityType="Model1.Supplier" Width="1.5" PointX="7.875" PointY="0.5" />
+        <EntityTypeShape EntityType="Model1.Project" Width="1.5" PointX="0.5" PointY="3" />
+        <EntityTypeShape EntityType="Model1.ProfitCenter" Width="1.5" PointX="0.5" PointY="7.25" />
+        <EntityTypeShape EntityType="Model1.Account" Width="1.5" PointX="0.5" PointY="5" />
+        <EntityTypeShape EntityType="Model1.AccountingTemplate" Width="1.5" PointX="2.625" PointY="0.5" />
+        <EntityTypeShape EntityType="Model1.AccountingTemplateRow" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="Model1.InvoiceAttest" Width="1.5" PointX="9.125" PointY="5" />
+        <EntityTypeShape EntityType="Model1.InvoiceRowAttest" Width="1.5" PointX="8.875" PointY="7.25" />
+        <EntityTypeShape EntityType="Model1.Currency" Width="1.5" PointX="5.25" PointY="0.5" />
+        <EntityTypeShape EntityType="Model1.Log" Width="1.5" PointX="11.875" PointY="9.5" />
+        <EntityTypeShape EntityType="Model1.Privilege" Width="1.5" PointX="16.625" PointY="2.375" />
+        <EntityTypeShape EntityType="Model1.Company" Width="1.5" PointX="6.625" PointY="3" />
+        <EntityTypeShape EntityType="Model1.DeliveryNote" Width="1.5" PointX="4.25" PointY="9.875" />
+        <EntityTypeShape EntityType="Model1.PeriodicAdjustment" Width="1.5" PointX="7.5" PointY="10.375" />
+        <AssociationConnector Association="Model1.AspNetUsersCompany" />
+        <AssociationConnector Association="Model1.InvoiceCompany" />
+        <AssociationConnector Association="Model1.CompanySetting" />
+        <AssociationConnector Association="Model1.CompanySupplier" />
+        <AssociationConnector Association="Model1.CompanyAccount" />
+        <AssociationConnector Association="Model1.CompanyAccountingTemplate" />
+        <AssociationConnector Association="Model1.CompanyCurrency" />
+        <AssociationConnector Association="Model1.CompanyDeliveryNote" />
+        <AssociationConnector Association="Model1.CompanyInbox" />
+        <AssociationConnector Association="Model1.CompanyProfitCenter" />
+        <AssociationConnector Association="Model1.CompanyProject" />
+        <AssociationConnector Association="Model1.AspNetUsersLog" />
+        <AssociationConnector Association="Model1.InvoiceAttestAspNetUsers" />
+        <AssociationConnector Association="Model1.InvoiceAttestInvoice" />
+        <AssociationConnector Association="Model1.AccountingTemplateAccountingTemplateRow" />
+        <AssociationConnector Association="Model1.InvoiceInvoiceRow" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

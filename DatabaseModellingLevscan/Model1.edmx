@@ -1,0 +1,741 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Model1StoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Settings" EntityType="Model1.Setting" />
+          <EntitySet Name="InboxSet" EntityType="Model1.Inbox" />
+          <EntitySet Name="InvoiceSet" EntityType="Model1.Invoice" />
+          <EntitySet Name="InvoiceRowSet" EntityType="Model1.InvoiceRow" />
+          <EntitySet Name="AspNetRoles" EntityType="Model1.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Model1.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Model1.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="Model1.AspNetUsers" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Model1.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Model1.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Model1.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="SupplierSet" EntityType="Model1.Supplier" />
+          <EntitySet Name="ProjectSet" EntityType="Model1.Project" />
+          <EntitySet Name="ProfitCenterSet" EntityType="Model1.ProfitCenter" />
+          <EntitySet Name="AccountSet" EntityType="Model1.Account" />
+          <EntitySet Name="AccountingTemplateSet" EntityType="Model1.AccountingTemplate" />
+          <EntitySet Name="AccountingTemplateRowSet" EntityType="Model1.AccountingTemplateRow" />
+          <EntitySet Name="InvoiceAttestSet" EntityType="Model1.InvoiceAttest" />
+          <EntitySet Name="InvoiceRowAttestSet" EntityType="Model1.InvoiceRowAttest" />
+          <EntitySet Name="CurrencySet" EntityType="Model1.Currency" />
+          <EntitySet Name="LogSet" EntityType="Model1.Log" />
+          <EntitySet Name="PrivilegeSet" EntityType="Model1.Privilege" />
+          <EntitySet Name="CompanySet" EntityType="Model1.Company" />
+          <EntitySet Name="DeliveryNoteSet" EntityType="Model1.DeliveryNote" />
+          <EntitySet Name="PeriodicAdjustmentSet" EntityType="Model1.PeriodicAdjustment" />
+          <AssociationSet Name="AspNetUsersCompany" Association="Model1.AspNetUsersCompany">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Company" EntitySet="CompanySet" />
+          </AssociationSet>
+          <AssociationSet Name="InvoiceCompany" Association="Model1.InvoiceCompany">
+            <End Role="Invoice" EntitySet="InvoiceSet" />
+            <End Role="Company" EntitySet="CompanySet" />
+          </AssociationSet>
+          <AssociationSet Name="CompanySetting" Association="Model1.CompanySetting">
+            <End Role="Setting" EntitySet="Settings" />
+            <End Role="Company" EntitySet="CompanySet" />
+          </AssociationSet>
+          <AssociationSet Name="CompanySupplier" Association="Model1.CompanySupplier">
+            <End Role="Company" EntitySet="CompanySet" />
+            <End Role="Supplier" EntitySet="SupplierSet" />
+          </AssociationSet>
+          <AssociationSet Name="CompanyAccount" Association="Model1.CompanyAccount">
+            <End Role="Company" EntitySet="CompanySet" />
+            <End Role="Account" EntitySet="AccountSet" />
+          </AssociationSet>
+          <AssociationSet Name="CompanyAccountingTemplate" Association="Model1.CompanyAccountingTemplate">
+            <End Role="Company" EntitySet="CompanySet" />
+            <End Role="AccountingTemplate" EntitySet="AccountingTemplateSet" />
+          </AssociationSet>
+          <AssociationSet Name="CompanyCurrency" Association="Model1.CompanyCurrency">
+            <End Role="Company" EntitySet="CompanySet" />
+            <End Role="Currency" EntitySet="CurrencySet" />
+          </AssociationSet>
+          <AssociationSet Name="CompanyDeliveryNote" Association="Model1.CompanyDeliveryNote">
+            <End Role="Company" EntitySet="CompanySet" />
+            <End Role="DeliveryNote" EntitySet="DeliveryNoteSet" />
+          </AssociationSet>
+          <AssociationSet Name="CompanyInbox" Association="Model1.CompanyInbox">
+            <End Role="Company" EntitySet="CompanySet" />
+            <End Role="Inbox" EntitySet="InboxSet" />
+          </AssociationSet>
+          <AssociationSet Name="CompanyProfitCenter" Association="Model1.CompanyProfitCenter">
+            <End Role="Company" EntitySet="CompanySet" />
+            <End Role="ProfitCenter" EntitySet="ProfitCenterSet" />
+          </AssociationSet>
+          <AssociationSet Name="CompanyProject" Association="Model1.CompanyProject">
+            <End Role="Company" EntitySet="CompanySet" />
+            <End Role="Project" EntitySet="ProjectSet" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUsersLog" Association="Model1.AspNetUsersLog">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Log" EntitySet="LogSet" />
+          </AssociationSet>
+          <AssociationSet Name="InvoiceAttestAspNetUsers" Association="Model1.InvoiceAttestAspNetUsers">
+            <End Role="InvoiceAttest" EntitySet="InvoiceAttestSet" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="InvoiceAttestInvoice" Association="Model1.InvoiceAttestInvoice">
+            <End Role="InvoiceAttest" EntitySet="InvoiceAttestSet" />
+            <End Role="Invoice" EntitySet="InvoiceSet" />
+          </AssociationSet>
+          <AssociationSet Name="AccountingTemplateAccountingTemplateRow" Association="Model1.AccountingTemplateAccountingTemplateRow">
+            <End Role="AccountingTemplate" EntitySet="AccountingTemplateSet" />
+            <End Role="AccountingTemplateRow" EntitySet="AccountingTemplateRowSet" />
+          </AssociationSet>
+          <AssociationSet Name="InvoiceInvoiceRow" Association="Model1.InvoiceInvoiceRow">
+            <End Role="Invoice" EntitySet="InvoiceSet" />
+            <End Role="InvoiceRow" EntitySet="InvoiceRowSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inbox">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="InvoiceRow" Relationship="Model1.InvoiceInvoiceRow" FromRole="Invoice" ToRole="InvoiceRow" />
+        </EntityType>
+        <EntityType Name="InvoiceRow">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Model1.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+          </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Model1.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Model1.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Model1.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Model1.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Model1.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="Company" Relationship="Model1.AspNetUsersCompany" FromRole="AspNetUsers" ToRole="Company" />
+          <NavigationProperty Name="Log" Relationship="Model1.AspNetUsersLog" FromRole="AspNetUsers" ToRole="Log" />
+          <NavigationProperty Name="InvoiceAttest" Relationship="Model1.InvoiceAttestAspNetUsers" FromRole="AspNetUsers" ToRole="InvoiceAttest" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="Model1.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model1.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="Model1.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model1.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="Model1.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="Model1.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProfitCenter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccountingTemplate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccountingTemplateRow" Relationship="Model1.AccountingTemplateAccountingTemplateRow" FromRole="AccountingTemplate" ToRole="AccountingTemplateRow" />
+        </EntityType>
+        <EntityType Name="AccountingTemplateRow">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountingTemplateId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InvoiceAttest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AspNetUsersId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Invoice" Relationship="Model1.InvoiceAttestInvoice" FromRole="InvoiceAttest" ToRole="Invoice" />
+        </EntityType>
+        <EntityType Name="InvoiceRowAttest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AspNetUsersId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Privilege">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransferToNext" Type="String" Nullable="false" />
+          <Property Name="AddRemoveRow" Type="String" Nullable="false" />
+          <Property Name="Poject" Type="String" Nullable="false" />
+          <Property Name="ProfitCenter" Type="String" Nullable="false" />
+          <Property Name="Vat" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Invoice" Relationship="Model1.InvoiceCompany" FromRole="Company" ToRole="Invoice" />
+          <NavigationProperty Name="Setting" Relationship="Model1.CompanySetting" FromRole="Company" ToRole="Setting" />
+          <NavigationProperty Name="Supplier" Relationship="Model1.CompanySupplier" FromRole="Company" ToRole="Supplier" />
+          <NavigationProperty Name="Account" Relationship="Model1.CompanyAccount" FromRole="Company" ToRole="Account" />
+          <NavigationProperty Name="AccountingTemplate" Relationship="Model1.CompanyAccountingTemplate" FromRole="Company" ToRole="AccountingTemplate" />
+          <NavigationProperty Name="Currency" Relationship="Model1.CompanyCurrency" FromRole="Company" ToRole="Currency" />
+          <NavigationProperty Name="DeliveryNote" Relationship="Model1.CompanyDeliveryNote" FromRole="Company" ToRole="DeliveryNote" />
+          <NavigationProperty Name="Inbox" Relationship="Model1.CompanyInbox" FromRole="Company" ToRole="Inbox" />
+          <NavigationProperty Name="ProfitCenter" Relationship="Model1.CompanyProfitCenter" FromRole="Company" ToRole="ProfitCenter" />
+          <NavigationProperty Name="Project" Relationship="Model1.CompanyProject" FromRole="Company" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="DeliveryNote">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" Nullable="true" />
+        </EntityType>
+        <EntityType Name="PeriodicAdjustment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <Association Name="AspNetUsersCompany">
+          <End Type="Model1.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+          <End Type="Model1.Company" Role="Company" Multiplicity="*" />
+        </Association>
+        <Association Name="InvoiceCompany">
+          <End Type="Model1.Invoice" Role="Invoice" Multiplicity="*" />
+          <End Type="Model1.Company" Role="Company" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CompanySetting">
+          <End Type="Model1.Setting" Role="Setting" Multiplicity="*" />
+          <End Type="Model1.Company" Role="Company" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Setting">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CompanySupplier">
+          <End Type="Model1.Company" Role="Company" Multiplicity="1" />
+          <End Type="Model1.Supplier" Role="Supplier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Supplier">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CompanyAccount">
+          <End Type="Model1.Company" Role="Company" Multiplicity="1" />
+          <End Type="Model1.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CompanyAccountingTemplate">
+          <End Type="Model1.Company" Role="Company" Multiplicity="1" />
+          <End Type="Model1.AccountingTemplate" Role="AccountingTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountingTemplate">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CompanyCurrency">
+          <End Type="Model1.Company" Role="Company" Multiplicity="1" />
+          <End Type="Model1.Currency" Role="Currency" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Currency">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CompanyDeliveryNote">
+          <End Type="Model1.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="Model1.DeliveryNote" Role="DeliveryNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DeliveryNote">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CompanyInbox">
+          <End Type="Model1.Company" Role="Company" Multiplicity="1" />
+          <End Type="Model1.Inbox" Role="Inbox" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inbox">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="AttestStatus">
+          <Member Name="New" Value="0" />
+          <Member Name="Attested" Value="1" />
+          <Member Name="Rejected" Value="2" />
+          <Member Name="Transfered" Value="3" />
+        </EnumType>
+        <Association Name="CompanyProfitCenter">
+          <End Type="Model1.Company" Role="Company" Multiplicity="1" />
+          <End Type="Model1.ProfitCenter" Role="ProfitCenter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProfitCenter">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CompanyProject">
+          <End Type="Model1.Company" Role="Company" Multiplicity="1" />
+          <End Type="Model1.Project" Role="Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Project">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUsersLog">
+          <End Type="Model1.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <End Type="Model1.Log" Role="Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="AspNetUsersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InvoiceAttestAspNetUsers">
+          <End Type="Model1.InvoiceAttest" Role="InvoiceAttest" Multiplicity="*" />
+          <End Type="Model1.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvoiceAttest">
+              <PropertyRef Name="AspNetUsersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InvoiceAttestInvoice">
+          <End Type="Model1.InvoiceAttest" Role="InvoiceAttest" Multiplicity="*" />
+          <End Type="Model1.Invoice" Role="Invoice" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvoiceAttest">
+              <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AccountingTemplateAccountingTemplateRow">
+          <End Type="Model1.AccountingTemplate" Role="AccountingTemplate" Multiplicity="1" />
+          <End Type="Model1.AccountingTemplateRow" Role="AccountingTemplateRow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountingTemplate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountingTemplateRow">
+              <PropertyRef Name="AccountingTemplateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InvoiceInvoiceRow">
+          <End Type="Model1.Invoice" Role="Invoice" Multiplicity="1" />
+          <End Type="Model1.InvoiceRow" Role="InvoiceRow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Invoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvoiceRow">
+              <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="Model1" />
+        <Alias Key="Target" Value="Model1.Store" />
+        <EntityContainerMapping CdmEntityContainer="Model1Container" StorageEntityContainer="Model1StoreContainer">
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="Model1.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="Model1.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="Model1.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="Model1.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="Model1.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
