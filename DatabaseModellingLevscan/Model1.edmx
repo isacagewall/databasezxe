@@ -238,6 +238,26 @@
             <End Role="Invoice" EntitySet="InvoiceSet" />
             <End Role="InvoiceRow" EntitySet="InvoiceRowSet" />
           </AssociationSet>
+          <AssociationSet Name="AccountAccountingTemplateRow" Association="Model1.AccountAccountingTemplateRow">
+            <End Role="Account" EntitySet="AccountSet" />
+            <End Role="AccountingTemplateRow" EntitySet="AccountingTemplateRowSet" />
+          </AssociationSet>
+          <AssociationSet Name="AccountInvoiceRow" Association="Model1.AccountInvoiceRow">
+            <End Role="Account" EntitySet="AccountSet" />
+            <End Role="InvoiceRow" EntitySet="InvoiceRowSet" />
+          </AssociationSet>
+          <AssociationSet Name="ProfitCenterAccount" Association="Model1.ProfitCenterAccount">
+            <End Role="Account" EntitySet="AccountSet" />
+            <End Role="ProfitCenter" EntitySet="ProfitCenterSet" />
+          </AssociationSet>
+          <AssociationSet Name="AccountProject" Association="Model1.AccountProject">
+            <End Role="Account" EntitySet="AccountSet" />
+            <End Role="Project" EntitySet="ProjectSet" />
+          </AssociationSet>
+          <AssociationSet Name="InvoiceRowAttestInvoiceRow" Association="Model1.InvoiceRowAttestInvoiceRow">
+            <End Role="InvoiceRow" EntitySet="InvoiceRowSet" />
+            <End Role="InvoiceRowAttest" EntitySet="InvoiceRowAttestSet" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Setting">
           <Key>
@@ -267,6 +287,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Model1.AccountInvoiceRow" FromRole="InvoiceRow" ToRole="Account" />
+          <NavigationProperty Name="InvoiceRowAttest" Relationship="Model1.InvoiceRowAttestInvoiceRow" FromRole="InvoiceRow" ToRole="InvoiceRowAttest" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -379,6 +401,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ProfitCenter" Relationship="Model1.ProfitCenterAccount" FromRole="Account" ToRole="ProfitCenter" />
+          <NavigationProperty Name="Project" Relationship="Model1.AccountProject" FromRole="Account" ToRole="Project" />
         </EntityType>
         <EntityType Name="AccountingTemplate">
           <Key>
@@ -394,6 +418,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AccountingTemplateId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Account" Relationship="Model1.AccountAccountingTemplateRow" FromRole="AccountingTemplateRow" ToRole="Account" />
         </EntityType>
         <EntityType Name="InvoiceAttest">
           <Key>
@@ -408,6 +433,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceRowId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Currency">
           <Key>
@@ -650,6 +676,34 @@
             </Principal>
             <Dependent Role="InvoiceRow">
               <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AccountAccountingTemplateRow">
+          <End Type="Model1.Account" Role="Account" Multiplicity="1" />
+          <End Type="Model1.AccountingTemplateRow" Role="AccountingTemplateRow" Multiplicity="*" />
+        </Association>
+        <Association Name="AccountInvoiceRow">
+          <End Type="Model1.Account" Role="Account" Multiplicity="1" />
+          <End Type="Model1.InvoiceRow" Role="InvoiceRow" Multiplicity="*" />
+        </Association>
+        <Association Name="ProfitCenterAccount">
+          <End Type="Model1.Account" Role="Account" Multiplicity="*" />
+          <End Type="Model1.ProfitCenter" Role="ProfitCenter" Multiplicity="0..1" />
+        </Association>
+        <Association Name="AccountProject">
+          <End Type="Model1.Account" Role="Account" Multiplicity="*" />
+          <End Type="Model1.Project" Role="Project" Multiplicity="0..1" />
+        </Association>
+        <Association Name="InvoiceRowAttestInvoiceRow">
+          <End Type="Model1.InvoiceRow" Role="InvoiceRow" Multiplicity="1" />
+          <End Type="Model1.InvoiceRowAttest" Role="InvoiceRowAttest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InvoiceRow">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InvoiceRowAttest">
+              <PropertyRef Name="InvoiceRowId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

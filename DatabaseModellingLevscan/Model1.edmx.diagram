@@ -46,6 +46,11 @@
         <AssociationConnector Association="Model1.InvoiceAttestInvoice" />
         <AssociationConnector Association="Model1.AccountingTemplateAccountingTemplateRow" />
         <AssociationConnector Association="Model1.InvoiceInvoiceRow" />
+        <AssociationConnector Association="Model1.AccountAccountingTemplateRow" />
+        <AssociationConnector Association="Model1.AccountInvoiceRow" />
+        <AssociationConnector Association="Model1.ProfitCenterAccount" />
+        <AssociationConnector Association="Model1.AccountProject" />
+        <AssociationConnector Association="Model1.InvoiceRowAttestInvoiceRow" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
